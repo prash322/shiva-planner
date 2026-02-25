@@ -259,18 +259,201 @@
             50% { transform: rotate(15deg); }
         }
         
-        /* Snake animation */
-        .snake {
+        /* Nandi Animation */
+        .nandi-container {
             position: absolute;
-            bottom: 60px;
-            left: 20%;
-            font-size: 28px;
-            animation: snakeSlither 3s ease-in-out infinite;
-            opacity: 0.7;
+            bottom: 30px;
+            left: 10%;
+            width: 120px;
+            height: 80px;
+            z-index: 5;
         }
-        @keyframes snakeSlither {
-            0%, 100% { transform: translateX(0) scaleX(1); }
-            50% { transform: translateX(10px) scaleX(1.1); }
+        .nandi {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: nandiBreath 3s ease-in-out infinite;
+        }
+        .nandi-body {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            width: 70px;
+            height: 45px;
+            background: linear-gradient(135deg, #f5f5dc 0%, #d4c4a8 50%, #c4b498 100%);
+            border-radius: 50% 60% 40% 45%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3), inset -5px -5px 15px rgba(0,0,0,0.1);
+        }
+        .nandi-head {
+            position: absolute;
+            bottom: 35px;
+            left: 0;
+            width: 40px;
+            height: 35px;
+            background: linear-gradient(135deg, #f5f5dc 0%, #d4c4a8 100%);
+            border-radius: 50% 50% 40% 40%;
+            transform-origin: right center;
+            animation: nandiNod 4s ease-in-out infinite;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        .nandi-snout {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            width: 25px;
+            height: 15px;
+            background: linear-gradient(135deg, #e8d8c8 0%, #d4c4b4 100%);
+            border-radius: 50%;
+        }
+        .nandi-eye {
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            width: 6px;
+            height: 8px;
+            background: #2a1a0a;
+            border-radius: 50%;
+            animation: nandiBlink 4s ease-in-out infinite;
+        }
+        .nandi-horn {
+            position: absolute;
+            width: 8px;
+            height: 25px;
+            background: linear-gradient(to top, #8B7355, #A08060, #C0A080);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .nandi-horn.left {
+            top: -15px;
+            left: 8px;
+            transform: rotate(-30deg);
+        }
+        .nandi-horn.right {
+            top: -15px;
+            left: 22px;
+            transform: rotate(30deg);
+        }
+        .nandi-ear {
+            position: absolute;
+            top: 5px;
+            width: 12px;
+            height: 18px;
+            background: linear-gradient(135deg, #f5f5dc, #e8d8c8);
+            border-radius: 50% 50% 30% 30%;
+            animation: nandiEarTwitch 5s ease-in-out infinite;
+        }
+        .nandi-ear.left {
+            left: -2px;
+            transform: rotate(-20deg);
+        }
+        .nandi-ear.right {
+            left: 28px;
+            transform: rotate(20deg);
+            animation-delay: 0.5s;
+        }
+        .nandi-leg {
+            position: absolute;
+            bottom: 0;
+            width: 12px;
+            height: 20px;
+            background: linear-gradient(to bottom, #d4c4a8, #c4b498);
+            border-radius: 5px 5px 3px 3px;
+        }
+        .nandi-leg.fl { left: 25px; }
+        .nandi-leg.fr { left: 40px; }
+        .nandi-leg.bl { left: 65px; }
+        .nandi-leg.br { left: 78px; }
+        .nandi-tail {
+            position: absolute;
+            bottom: 25px;
+            right: 5px;
+            width: 30px;
+            height: 6px;
+            background: linear-gradient(to right, #c4b498, #a08060);
+            border-radius: 3px;
+            transform-origin: left center;
+            animation: nandiTailSwish 2s ease-in-out infinite;
+        }
+        .nandi-tail::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -3px;
+            width: 12px;
+            height: 12px;
+            background: #8B7355;
+            border-radius: 50%;
+        }
+        .nandi-hump {
+            position: absolute;
+            bottom: 45px;
+            left: 45px;
+            width: 30px;
+            height: 20px;
+            background: linear-gradient(135deg, #e8d8c8 0%, #d4c4a8 100%);
+            border-radius: 50% 50% 30% 30%;
+        }
+        .nandi-bell {
+            position: absolute;
+            bottom: 30px;
+            left: 12px;
+            width: 10px;
+            height: 12px;
+            background: linear-gradient(135deg, #ffd700, #daa520);
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+            animation: bellSwing 1s ease-in-out infinite;
+        }
+        .nandi-bell::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: #b8860b;
+            border-radius: 50%;
+        }
+        .nandi-glow {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: 90px;
+            height: 30px;
+            background: radial-gradient(ellipse, rgba(255,215,0,0.2) 0%, transparent 70%);
+            animation: nandiGlow 3s ease-in-out infinite;
+        }
+        @keyframes nandiBreath {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.02); }
+        }
+        @keyframes nandiNod {
+            0%, 100% { transform: rotate(0deg); }
+            30% { transform: rotate(-5deg); }
+            60% { transform: rotate(3deg); }
+        }
+        @keyframes nandiBlink {
+            0%, 45%, 55%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+        @keyframes nandiEarTwitch {
+            0%, 90%, 100% { transform: rotate(-20deg); }
+            95% { transform: rotate(-10deg); }
+        }
+        @keyframes nandiTailSwish {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-15deg); }
+        }
+        @keyframes bellSwing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        @keyframes nandiGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
         
         /* ===== MUSIC BUTTON ===== */
@@ -793,10 +976,31 @@
     <div class="shiva-section">
         <div class="trishul">🔱</div>
         <div class="third-eye-glow"></div>
-        <img class="shiva-img" src="shiva.jpg" alt="Lord Shiva" onerror="this.src='https://i.imgur.com/placeholder.jpg'">
+        <img class="shiva-img" id="shivaImg" src="shiva-sun.jpg" alt="Lord Shiva">
         <div class="shiva-text">॥ ॐ नमः शिवाय ॥</div>
         <div class="damru">🪘</div>
-        <div class="snake">🐍</div>
+        <!-- Nandi - Shiva's Divine Bull -->
+        <div class="nandi-container">
+            <div class="nandi">
+                <div class="nandi-glow"></div>
+                <div class="nandi-leg fl"></div>
+                <div class="nandi-leg fr"></div>
+                <div class="nandi-leg bl"></div>
+                <div class="nandi-leg br"></div>
+                <div class="nandi-body"></div>
+                <div class="nandi-hump"></div>
+                <div class="nandi-tail"></div>
+                <div class="nandi-head">
+                    <div class="nandi-horn left"></div>
+                    <div class="nandi-horn right"></div>
+                    <div class="nandi-ear left"></div>
+                    <div class="nandi-ear right"></div>
+                    <div class="nandi-eye"></div>
+                    <div class="nandi-snout"></div>
+                    <div class="nandi-bell"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Main Tabs -->
@@ -954,6 +1158,22 @@
         const DAYS = ['sun','mon','tue','wed','thu','fri','sat'];
         const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const DAY_EMOJIS = ['🕉️','🔱','🔱','🕉️','🔱','🔱','🪘'];
+        const SHIVA_IMAGES = {
+            sun: 'shiva-sun.jpg',
+            mon: 'shiva-mon.jpg',
+            tue: 'shiva-tue.jpg',
+            wed: 'shiva-wed.jpg',
+            thu: 'shiva-thu.jpg',
+            fri: 'shiva-fri.jpg',
+            sat: 'shiva-sat.jpg'
+        };
+        
+        function updateShivaImage() {
+            const img = document.getElementById('shivaImg');
+            if (img && SHIVA_IMAGES[currentDay]) {
+                img.src = SHIVA_IMAGES[currentDay];
+            }
+        }
 
         // ===== MUSIC =====
         const audio = document.getElementById('audio');
@@ -1133,6 +1353,7 @@
             currentDay = d;
             renderDaySelector();
             renderTasks();
+            updateShivaImage();
         }
 
         // ===== TASKS =====
@@ -1439,6 +1660,7 @@
             showQuote();
             renderDaySelector();
             renderTasks();
+            updateShivaImage();
         }
 
         if (document.readyState === 'loading') {
