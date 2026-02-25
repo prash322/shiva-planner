@@ -259,20 +259,11 @@
             50% { transform: rotate(15deg); }
         }
         
-        /* Nandi image - next to damru */
-        .nandi-img {
-            position: absolute;
-            bottom: 40px;
+        /* Left Damru */
+        .damru.left {
+            right: auto;
             left: 15%;
-            width: 70px;
-            height: auto;
-            animation: nandiFloat 3s ease-in-out infinite;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
-            opacity: 0.9;
-        }
-        @keyframes nandiFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            animation-delay: 0.25s;
         }
         
         /* ===== MUSIC BUTTON ===== */
@@ -761,10 +752,92 @@
             50% { opacity: 0.4; transform: scale(1.1); }
         }
         
-        @media (max-width: 400px) {
-            .shiva-section { height: 280px; }
-            .shiva-img { width: 150px; height: 185px; }
-            .trishul { font-size: 140px; }
+        /* Mobile Responsive - All Phone Sizes */
+        @media (max-width: 768px) {
+            .shiva-section { height: 260px; }
+            .shiva-img { width: 140px; height: 175px; }
+            .trishul { font-size: 130px; }
+            .shiva-text { font-size: 0.95rem; }
+            .day-selector { gap: 4px; padding: 10px; margin: 10px; }
+            .day-btn { padding: 10px 3px; font-size: 0.7rem; }
+            .content { padding: 0 10px 10px; }
+            .quote-box { padding: 12px; margin: 10px; }
+            .quote-text { font-size: 0.8rem; }
+            .task-item { padding: 12px; }
+            .task-title { font-size: 0.85rem; }
+            .damru { font-size: 25px; bottom: 35px; }
+            .damru.left { left: 10%; }
+            .third-eye-glow { width: 150px; height: 150px; }
+        }
+        
+        @media (max-width: 480px) {
+            .shiva-section { height: 240px; }
+            .shiva-img { width: 120px; height: 150px; }
+            .trishul { font-size: 110px; }
+            .shiva-text { font-size: 0.85rem; letter-spacing: 1px; }
+            .day-selector { gap: 3px; padding: 8px; margin: 8px; }
+            .day-btn { padding: 8px 2px; font-size: 0.65rem; }
+            .main-tab { padding: 12px 8px; font-size: 0.8rem; }
+            .quote-box { padding: 10px; margin: 8px; }
+            .quote-text { font-size: 0.75rem; }
+            .progress-box { padding: 12px; }
+            .task-item { padding: 10px; gap: 10px; }
+            .task-check { width: 22px; height: 22px; }
+            .task-time { font-size: 0.7rem; }
+            .task-title { font-size: 0.8rem; }
+            .damru { font-size: 22px; bottom: 30px; right: 15%; }
+            .damru.left { left: 8%; }
+            .add-btn { width: 50px; height: 50px; font-size: 24px; bottom: 20px; right: 15px; }
+            .music-btn { width: 46px; height: 46px; font-size: 1.2rem; top: 10px; right: 10px; }
+            .om-symbol { font-size: 30px; bottom: 15px; left: 15px; }
+            .third-eye-glow { width: 120px; height: 120px; }
+            .cal-header { padding: 10px; }
+            .cal-month { font-size: 0.9rem; min-width: 120px; }
+            .cal-today-btn { padding: 6px 10px; font-size: 0.8rem; }
+            .cal-day { font-size: 0.7rem; }
+            .upcoming-meeting { padding: 10px; }
+            .upcoming-meeting .meeting-title { font-size: 0.8rem; }
+            .meeting-legend { gap: 10px; padding: 8px; }
+            .legend-item { font-size: 0.7rem; }
+            .sync-btn { padding: 10px 15px; font-size: 0.8rem; }
+            .reset-btn { padding: 8px 12px; font-size: 0.8rem; }
+        }
+        
+        @media (max-width: 360px) {
+            .shiva-section { height: 220px; }
+            .shiva-img { width: 100px; height: 125px; }
+            .trishul { font-size: 90px; }
+            .shiva-text { font-size: 0.75rem; }
+            .day-btn { padding: 6px 1px; font-size: 0.6rem; }
+            .main-tab { padding: 10px 5px; font-size: 0.75rem; }
+            .task-item { padding: 8px; gap: 8px; }
+            .task-check { width: 20px; height: 20px; }
+            .damru { font-size: 18px; }
+            .add-btn { width: 45px; height: 45px; font-size: 22px; }
+            .music-btn { width: 42px; height: 42px; }
+            .modal-box { padding: 18px; }
+            .modal-box h2 { font-size: 1.1rem; }
+            .form-group input, .form-group select, .form-group textarea { padding: 10px; font-size: 0.85rem; }
+            .modal-btn { padding: 12px; font-size: 0.9rem; }
+        }
+        
+        /* Extra small phones */
+        @media (max-width: 320px) {
+            .shiva-section { height: 200px; }
+            .shiva-img { width: 90px; height: 110px; }
+            .trishul { font-size: 80px; }
+            .day-selector { padding: 6px; }
+            .day-btn { padding: 5px 1px; font-size: 0.55rem; }
+            .quote-box { padding: 8px; }
+            .quote-text { font-size: 0.7rem; }
+        }
+        
+        /* Landscape mode on phones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .shiva-section { height: 180px; }
+            .shiva-img { width: 80px; height: 100px; }
+            .trishul { font-size: 70px; }
+            .krishna-glow, .third-eye-glow { display: none; }
         }
     </style>
 </head>
@@ -800,7 +873,7 @@
         <img class="shiva-img" id="shivaImg" src="shiva-sun.jpg" alt="Lord Shiva">
         <div class="shiva-text">॥ ॐ नमः शिवाय ॥</div>
         <div class="damru">🪘</div>
-        <img class="nandi-img" src="nandi.jpg" alt="Nandi">
+        <div class="damru left">🪘</div>
     </div>
 
     <!-- Main Tabs -->
