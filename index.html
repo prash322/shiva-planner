@@ -259,320 +259,64 @@
             50% { transform: rotate(15deg); }
         }
         
-        /* Walking Nandi Animation - Crosses screen left to right, then right to left */
-        .nandi-walker {
+        /* Shiva on Nandi - Walking Animation */
+        .shiva-nandi-walker {
             position: fixed;
-            bottom: 50px;
-            left: -200px;
-            width: 180px;
-            height: 120px;
+            bottom: 30px;
+            left: -250px;
             z-index: 50;
-            animation: nandiWalk 20s linear infinite;
+            animation: shivaNandiWalk 25s linear infinite;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
         }
-        @keyframes nandiWalk {
-            0% { left: -200px; transform: scaleX(1); }
+        .shiva-nandi-walker img {
+            height: 180px;
+            width: auto;
+            border-radius: 15px;
+            animation: nandiFloat 1s ease-in-out infinite;
+        }
+        @keyframes shivaNandiWalk {
+            0% { left: -250px; transform: scaleX(1); }
             45% { left: calc(100% + 50px); transform: scaleX(1); }
             50% { left: calc(100% + 50px); transform: scaleX(-1); }
-            95% { left: -200px; transform: scaleX(-1); }
-            100% { left: -200px; transform: scaleX(1); }
+            95% { left: -250px; transform: scaleX(-1); }
+            100% { left: -250px; transform: scaleX(1); }
+        }
+        @keyframes nandiFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
-        .nandi-body-main {
-            position: absolute;
-            bottom: 25px;
-            left: 40px;
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(180deg, #e8dcc8 0%, #d4c4a8 30%, #c9b99a 70%, #b8a888 100%);
-            border-radius: 55% 50% 45% 50%;
-            box-shadow: 
-                inset 5px 5px 15px rgba(255,255,255,0.2),
-                inset -5px -5px 15px rgba(0,0,0,0.15),
-                0 8px 25px rgba(0,0,0,0.4);
-        }
-        
-        .nandi-hump-main {
-            position: absolute;
-            bottom: 75px;
-            left: 70px;
-            width: 45px;
-            height: 30px;
-            background: linear-gradient(180deg, #f0e6d6 0%, #e0d0c0 50%, #d4c4a8 100%);
-            border-radius: 50% 50% 40% 40%;
-            box-shadow: inset 2px 2px 8px rgba(255,255,255,0.3);
-        }
-        
-        .nandi-head-main {
-            position: absolute;
-            bottom: 55px;
-            left: 5px;
-            width: 55px;
-            height: 45px;
-            background: linear-gradient(135deg, #f0e6d6 0%, #e0d0c0 50%, #d4c4a8 100%);
-            border-radius: 45% 55% 50% 45%;
-            transform-origin: right center;
-            animation: nandiHeadBob 0.6s ease-in-out infinite;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.25);
-        }
-        @keyframes nandiHeadBob {
-            0%, 100% { transform: rotate(0deg) translateY(0); }
-            50% { transform: rotate(-3deg) translateY(-3px); }
-        }
-        
-        .nandi-face {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 30px;
-            background: linear-gradient(180deg, #e8dcc8 0%, #d8c8b8 100%);
-            border-radius: 40% 40% 50% 50%;
-        }
-        
-        .nandi-nose {
-            position: absolute;
-            bottom: 2px;
-            left: 10px;
-            width: 22px;
-            height: 12px;
-            background: linear-gradient(180deg, #c0a090 0%, #a08070 100%);
-            border-radius: 50%;
-        }
-        .nandi-nostril {
-            position: absolute;
-            bottom: 3px;
-            width: 5px;
-            height: 4px;
-            background: #5a4a3a;
-            border-radius: 50%;
-        }
-        .nandi-nostril.left { left: 4px; }
-        .nandi-nostril.right { left: 13px; }
-        
-        .nandi-eye-main {
-            position: absolute;
-            top: 12px;
-            width: 10px;
-            height: 12px;
-            background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
-            border-radius: 50%;
-            box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
-        }
-        .nandi-eye-main.left { left: 30px; }
-        .nandi-eye-main.right { left: 42px; }
-        .nandi-pupil {
-            position: absolute;
-            top: 3px;
-            left: 2px;
-            width: 6px;
-            height: 7px;
-            background: radial-gradient(circle at 30% 30%, #4a3a2a 0%, #2a1a0a 100%);
-            border-radius: 50%;
-            animation: nandiLook 3s ease-in-out infinite;
-        }
-        @keyframes nandiLook {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(1px); }
-        }
-        
-        .nandi-horn-main {
-            position: absolute;
-            width: 10px;
-            height: 35px;
-            background: linear-gradient(to top, #6a5a4a 0%, #8a7a6a 30%, #a09080 60%, #c0b0a0 100%);
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-        }
-        .nandi-horn-main.left {
-            top: -25px;
-            left: 12px;
-            transform: rotate(-35deg);
-        }
-        .nandi-horn-main.right {
-            top: -25px;
-            left: 35px;
-            transform: rotate(35deg);
-        }
-        
-        .nandi-ear-main {
-            position: absolute;
-            top: 5px;
-            width: 18px;
-            height: 25px;
-            background: linear-gradient(180deg, #e8dcc8 0%, #d8c8b8 100%);
-            border-radius: 50% 50% 40% 40%;
-            animation: nandiEarFlap 2s ease-in-out infinite;
-        }
-        .nandi-ear-main.left {
-            left: 0px;
-            transform: rotate(-25deg);
-        }
-        .nandi-ear-main.right {
-            left: 48px;
-            transform: rotate(25deg);
-            animation-delay: 0.3s;
-        }
-        .nandi-ear-inner {
-            position: absolute;
-            top: 5px;
-            left: 4px;
-            width: 10px;
-            height: 15px;
-            background: linear-gradient(180deg, #d0b0a0 0%, #c0a090 100%);
-            border-radius: 50%;
-        }
-        @keyframes nandiEarFlap {
-            0%, 100% { transform: rotate(-25deg); }
-            50% { transform: rotate(-15deg); }
-        }
-        
-        /* Walking Legs */
-        .nandi-leg-main {
-            position: absolute;
-            bottom: 0;
-            width: 16px;
-            height: 35px;
-            background: linear-gradient(90deg, #c9b99a 0%, #d9c9a9 50%, #c9b99a 100%);
-            border-radius: 8px 8px 5px 5px;
-            transform-origin: top center;
-        }
-        .nandi-leg-main::after {
+        /* Divine glow trail */
+        .shiva-nandi-walker::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 2px;
-            width: 12px;
-            height: 8px;
-            background: linear-gradient(180deg, #a09080 0%, #807060 100%);
-            border-radius: 3px 3px 5px 5px;
-        }
-        .nandi-leg-main.fl { left: 50px; animation: legFrontLeft 0.6s ease-in-out infinite; }
-        .nandi-leg-main.fr { left: 70px; animation: legFrontRight 0.6s ease-in-out infinite; }
-        .nandi-leg-main.bl { left: 105px; animation: legBackLeft 0.6s ease-in-out infinite; }
-        .nandi-leg-main.br { left: 120px; animation: legBackRight 0.6s ease-in-out infinite; }
-        
-        @keyframes legFrontLeft {
-            0%, 100% { transform: rotate(15deg); }
-            50% { transform: rotate(-15deg); }
-        }
-        @keyframes legFrontRight {
-            0%, 100% { transform: rotate(-15deg); }
-            50% { transform: rotate(15deg); }
-        }
-        @keyframes legBackLeft {
-            0%, 100% { transform: rotate(-15deg); }
-            50% { transform: rotate(15deg); }
-        }
-        @keyframes legBackRight {
-            0%, 100% { transform: rotate(15deg); }
-            50% { transform: rotate(-15deg); }
-        }
-        
-        .nandi-tail-main {
-            position: absolute;
-            bottom: 50px;
-            left: 135px;
-            width: 40px;
-            height: 8px;
-            background: linear-gradient(90deg, #c9b99a 0%, #a09080 100%);
-            border-radius: 4px;
-            transform-origin: left center;
-            animation: nandiTailWag 0.8s ease-in-out infinite;
-        }
-        .nandi-tail-main::after {
-            content: '';
-            position: absolute;
-            right: -12px;
-            top: -5px;
-            width: 18px;
-            height: 18px;
-            background: radial-gradient(circle, #8a7a6a 0%, #6a5a4a 100%);
-            border-radius: 50%;
-        }
-        @keyframes nandiTailWag {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(20deg); }
-        }
-        
-        /* Golden Bell Necklace */
-        .nandi-necklace {
-            position: absolute;
-            bottom: 45px;
-            left: 20px;
-            width: 50px;
-            height: 20px;
-            border: 3px solid transparent;
-            border-bottom-color: #ffd700;
-            border-radius: 0 0 50% 50%;
-        }
-        .nandi-bell-main {
-            position: absolute;
-            bottom: 35px;
-            left: 35px;
-            width: 14px;
-            height: 18px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffec80 30%, #daa520 70%, #b8860b 100%);
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            box-shadow: 0 0 15px rgba(255,215,0,0.6), inset 2px 2px 5px rgba(255,255,255,0.5);
-            animation: bellRing 0.3s ease-in-out infinite;
-        }
-        .nandi-bell-main::after {
-            content: '';
-            position: absolute;
-            bottom: 3px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 5px;
-            height: 5px;
-            background: #8b6914;
-            border-radius: 50%;
+            width: 200px;
+            height: 50px;
+            background: radial-gradient(ellipse, rgba(255,215,0,0.4) 0%, rgba(0,212,255,0.2) 40%, transparent 70%);
+            filter: blur(10px);
+            animation: glowPulse 2s ease-in-out infinite;
         }
-        @keyframes bellRing {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-        }
-        
-        /* Divine Glow under Nandi */
-        .nandi-divine-glow {
-            position: absolute;
-            bottom: -10px;
-            left: 30px;
-            width: 140px;
-            height: 40px;
-            background: radial-gradient(ellipse, rgba(255,215,0,0.3) 0%, rgba(0,212,255,0.1) 50%, transparent 70%);
-            animation: divineGlow 2s ease-in-out infinite;
-            filter: blur(5px);
-        }
-        @keyframes divineGlow {
-            0%, 100% { opacity: 0.4; transform: scaleX(1); }
-            50% { opacity: 0.7; transform: scaleX(1.1); }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+            50% { opacity: 0.8; transform: translateX(-50%) scaleX(1.2); }
         }
         
-        /* Dust particles when walking */
-        .nandi-dust {
+        /* Flower petals falling behind */
+        .shiva-nandi-walker::after {
+            content: '🌸';
             position: absolute;
-            bottom: 5px;
-            left: 60px;
-            width: 80px;
-            height: 20px;
-            pointer-events: none;
+            top: 0;
+            right: -20px;
+            font-size: 20px;
+            animation: petalFall 1.5s ease-in-out infinite;
+            opacity: 0.7;
         }
-        .dust-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(200,180,150,0.6);
-            border-radius: 50%;
-            animation: dustFloat 0.8s ease-out infinite;
-        }
-        .dust-particle:nth-child(1) { left: 0; animation-delay: 0s; }
-        .dust-particle:nth-child(2) { left: 15px; animation-delay: 0.1s; }
-        .dust-particle:nth-child(3) { left: 30px; animation-delay: 0.2s; }
-        .dust-particle:nth-child(4) { left: 45px; animation-delay: 0.3s; }
-        .dust-particle:nth-child(5) { left: 60px; animation-delay: 0.15s; }
-        @keyframes dustFloat {
-            0% { transform: translateY(0) scale(1); opacity: 0.6; }
-            100% { transform: translateY(-15px) scale(0.3); opacity: 0; }
+        @keyframes petalFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(100px) rotate(180deg); opacity: 0; }
         }
         
         /* ===== MUSIC BUTTON ===== */
@@ -1076,39 +820,9 @@
     
     <div class="om-symbol">🕉️</div>
     
-    <!-- Walking Nandi - Crosses screen -->
-    <div class="nandi-walker">
-        <div class="nandi-divine-glow"></div>
-        <div class="nandi-dust">
-            <div class="dust-particle"></div>
-            <div class="dust-particle"></div>
-            <div class="dust-particle"></div>
-            <div class="dust-particle"></div>
-            <div class="dust-particle"></div>
-        </div>
-        <div class="nandi-leg-main fl"></div>
-        <div class="nandi-leg-main fr"></div>
-        <div class="nandi-leg-main bl"></div>
-        <div class="nandi-leg-main br"></div>
-        <div class="nandi-body-main"></div>
-        <div class="nandi-hump-main"></div>
-        <div class="nandi-tail-main"></div>
-        <div class="nandi-necklace"></div>
-        <div class="nandi-bell-main"></div>
-        <div class="nandi-head-main">
-            <div class="nandi-horn-main left"></div>
-            <div class="nandi-horn-main right"></div>
-            <div class="nandi-ear-main left"><div class="nandi-ear-inner"></div></div>
-            <div class="nandi-ear-main right"><div class="nandi-ear-inner"></div></div>
-            <div class="nandi-eye-main left"><div class="nandi-pupil"></div></div>
-            <div class="nandi-eye-main right"><div class="nandi-pupil"></div></div>
-            <div class="nandi-face">
-                <div class="nandi-nose">
-                    <div class="nandi-nostril left"></div>
-                    <div class="nandi-nostril right"></div>
-                </div>
-            </div>
-        </div>
+    <!-- Shiva on Nandi - Walking across screen -->
+    <div class="shiva-nandi-walker">
+        <img src="shiva-nandi.jpg" alt="Lord Shiva on Nandi">
     </div>
 
     <!-- Kailasa Background -->
