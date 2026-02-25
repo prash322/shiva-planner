@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a0a12">
+    <title>🕉️ Shiva Planner - Kailasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a12;
+            --bg-secondary: #12121f;
+            --bg-card: #1a1a2e;
+            --accent: #00d4ff;
+            --accent-2: #7b68ee;
+            --trishul-gold: #d4af37;
+            --moon-silver: #c0c0c0;
+            --fire-orange: #ff6b35;
+            --snow-white: #f0f8ff;
+            --text-primary: #e8e8ff;
+            --text-secondary: #8888aa;
+            --success: #00e5a0;
+            --danger: #ff4757;
+            --professional: #7b68ee;
+            --business: #00b894;
+            --personal: #e17055;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-bottom: 100px;
+            overflow-x: hidden;
+        }
+        
+        /* ===== KAILASA BACKGROUND ===== */
+        .kailasa-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background: linear-gradient(180deg, #0a0a12 0%, #1a1a3a 30%, #2a2a4a 60%, #1a1a2e 100%);
+            overflow: hidden;
+        }
+        
+        /* Mountain Range */
+        .mountains {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60%;
+        }
+        .mountain {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .mountain-1 {
+            left: -5%;
+            border-width: 0 200px 350px 200px;
+            border-color: transparent transparent #1a1a2e transparent;
+            filter: brightness(0.6);
+        }
+        .mountain-2 {
+            left: 20%;
+            border-width: 0 180px 300px 180px;
+            border-color: transparent transparent #252540 transparent;
+            filter: brightness(0.7);
+        }
+        .mountain-kailasa {
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 250px 450px 250px;
+            border-color: transparent transparent #2a2a50 transparent;
+            animation: kailasaGlow 4s ease-in-out infinite;
+        }
+        .mountain-4 {
+            right: 20%;
+            border-width: 0 170px 280px 170px;
+            border-color: transparent transparent #222238 transparent;
+            filter: brightness(0.65);
+        }
+        .mountain-5 {
+            right: -10%;
+            border-width: 0 220px 380px 220px;
+            border-color: transparent transparent #1a1a2e transparent;
+            filter: brightness(0.5);
+        }
+        
+        /* Snow caps */
+        .snow-cap {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 100px 150px 100px;
+            border-color: transparent transparent rgba(255,255,255,0.3) transparent;
+            animation: snowShimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes kailasaGlow {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 30px rgba(0,212,255,0.2)); }
+            50% { filter: brightness(1.1) drop-shadow(0 0 60px rgba(0,212,255,0.4)); }
+        }
+        @keyframes snowShimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Stars */
+        .stars {
+            position: absolute;
+            inset: 0;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        
+        /* Moon */
+        .moon {
+            position: absolute;
+            top: 8%;
+            right: 15%;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #c0c0c0 50%, #888 100%);
+            box-shadow: 0 0 40px rgba(255,255,255,0.5), 0 0 80px rgba(200,200,255,0.3);
+            animation: moonFloat 6s ease-in-out infinite;
+        }
+        .moon::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(150,150,150,0.3);
+        }
+        @keyframes moonFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Floating Particles - Ash/Snow */
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: floatUp 8s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* ===== SHIVA SECTION ===== */
+        .shiva-section {
+            position: relative;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        /* Trishul behind Shiva */
+        .trishul {
+            position: absolute;
+            top: 10px;
+            font-size: 180px;
+            color: var(--trishul-gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.5);
+            opacity: 0.3;
+            animation: trishulPulse 4s ease-in-out infinite;
+            z-index: 0;
+        }
+        @keyframes trishulPulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.02); }
+        }
+        
+        /* Third Eye Glow */
+        .third-eye-glow {
+            position: absolute;
+            top: 60px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,212,255,0.4) 0%, rgba(123,104,238,0.2) 40%, transparent 70%);
+            animation: thirdEyeGlow 3s ease-in-out infinite;
+            z-index: 1;
+        }
+        @keyframes thirdEyeGlow {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+        
+        .shiva-img {
+            width: 180px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 40px rgba(0,212,255,0.5), 0 0 80px rgba(123,104,238,0.3);
+            animation: shivaFloat 5s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        @keyframes shivaFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .shiva-text {
+            margin-top: 15px;
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(0,212,255,0.5);
+            z-index: 2;
+            letter-spacing: 2px;
+        }
+        
+        /* Damru animation */
+        .damru {
+            position: absolute;
+            bottom: 40px;
+            right: 20%;
+            font-size: 30px;
+            animation: damruShake 0.5s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        @keyframes damruShake {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+        
+        /* Snake animation */
+        .snake {
+            position: absolute;
+            bottom: 60px;
+            left: 20%;
+            font-size: 28px;
+            animation: snakeSlither 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        @keyframes snakeSlither {
+            0%, 100% { transform: translateX(0) scaleX(1); }
+            50% { transform: translateX(10px) scaleX(1.1); }
+        }
+        
+        /* ===== MUSIC BUTTON ===== */
+        .music-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a1a2e, #2a2a4a);
+            border: 3px solid var(--accent);
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0,212,255,0.3);
+        }
+        .music-btn:hover { transform: scale(1.1); }
+        .music-btn.playing {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            animation: musicPulse 1s infinite;
+        }
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 0 20px var(--accent); }
+            50% { box-shadow: 0 0 40px var(--accent), 0 0 60px var(--accent-2); }
+        }
+        
+        /* ===== MAIN TABS ===== */
+        .main-tabs {
+            display: flex;
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .main-tab {
+            flex: 1;
+            padding: 14px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        .main-tab.active {
+            color: var(--accent);
+            background: rgba(0,212,255,0.1);
+        }
+        
+        /* ===== TAB CONTENT ===== */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* ===== QUOTE BOX ===== */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(123,104,238,0.08));
+            padding: 14px;
+            margin: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(0,212,255,0.2);
+            position: relative;
+        }
+        .quote-text { 
+            font-style: italic; 
+            font-size: 0.85rem; 
+            line-height: 1.6; 
+            margin-bottom: 6px;
+            font-family: 'Cinzel', serif;
+        }
+        .quote-src { font-size: 0.75rem; color: var(--accent); text-align: right; }
+        .quote-refresh {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,212,255,0.2);
+            border: none;
+            color: var(--accent);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .quote-refresh:hover { background: var(--accent); color: #000; }
+        
+        /* ===== DAY SELECTOR ===== */
+        .day-selector {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            padding: 12px;
+            margin: 12px;
+            background: linear-gradient(135deg, #1a1a3a, #2a2a5a);
+            border-radius: 15px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.2);
+        }
+        .day-btn {
+            padding: 12px 5px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, #2a2a4a, #3a3a6a);
+        }
+        .day-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+        }
+        .day-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #000;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0,212,255,0.5);
+        }
+        .day-btn.today:not(.active) {
+            border-color: var(--fire-orange);
+            box-shadow: 0 0 10px rgba(255,107,53,0.4);
+        }
+        
+        /* ===== CONTENT ===== */
+        .content {
+            padding: 0 12px 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* ===== PROGRESS ===== */
+        .progress-box {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(0,212,255,0.2);
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        .progress-val { color: var(--accent); font-weight: 600; }
+        .progress-track {
+            height: 10px;
+            background: var(--bg-primary);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--fire-orange));
+            border-radius: 5px;
+            transition: width 0.4s;
+        }
+        
+        /* ===== TASK LIST ===== */
+        .task-list { display: flex; flex-direction: column; gap: 10px; }
+        .task-item {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border-left: 4px solid var(--accent);
+            animation: slideIn 0.3s ease-out;
+            border: 1px solid rgba(0,212,255,0.1);
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .task-item.completed { opacity: 0.5; }
+        .task-item.completed .task-title { text-decoration: line-through; }
+        .task-check {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .task-check:hover { border-color: var(--accent-2); transform: scale(1.1); }
+        .task-check.done { background: var(--success); border-color: var(--success); }
+        .task-check.done::after { content: '✓'; color: #fff; font-weight: bold; }
+        .task-body { flex: 1; }
+        .task-time { font-size: 0.75rem; color: var(--accent); font-weight: 600; margin-bottom: 3px; }
+        .task-title { font-size: 0.9rem; line-height: 1.4; }
+        .task-btns { display: flex; gap: 6px; opacity: 0; transition: opacity 0.3s; }
+        .task-item:hover .task-btns { opacity: 1; }
+        .task-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: none;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .task-btn:hover { background: var(--accent); color: #000; }
+        .task-btn.del:hover { background: var(--danger); color: #fff; }
+        
+        /* ===== CALENDAR ===== */
+        .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            margin-bottom: 14px;
+        }
+        .cal-nav { display: flex; gap: 8px; align-items: center; }
+        .cal-nav button {
+            background: var(--bg-secondary);
+            border: none;
+            color: var(--text-primary);
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .cal-nav button:hover { background: var(--accent); color: #000; }
+        .cal-month { font-size: 1rem; font-weight: 600; min-width: 140px; text-align: center; }
+        .cal-today-btn {
+            background: var(--accent);
+            border: none;
+            color: #000;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+        }
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            background: var(--bg-card);
+            padding: 12px;
+            border-radius: 14px;
+            margin-bottom: 14px;
+        }
+        .cal-weekday {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            font-weight: 600;
+        }
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            position: relative;
+        }
+        .cal-day:hover { background: rgba(0,212,255,0.1); }
+        .cal-day.other { opacity: 0.3; }
+        .cal-day.today { background: var(--accent); color: #000; font-weight: 600; }
+        .cal-day.selected { background: var(--accent-2); color: #fff; font-weight: 600; }
+        .cal-day.has-meeting::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--fire-orange);
+        }
+        
+        /* ===== MEETING LEGEND ===== */
+        .meeting-legend {
+            display: flex;
+            gap: 14px;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .legend-dot.professional { background: var(--professional); }
+        .legend-dot.business { background: var(--business); }
+        .legend-dot.personal { background: var(--personal); }
+        
+        /* ===== UPCOMING MEETINGS ===== */
+        .upcoming-section {
+            background: linear-gradient(135deg, #1a2a3a, #0d1a2d);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 2px solid var(--accent);
+        }
+        .upcoming-meeting {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--professional);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .upcoming-meeting.business { border-left-color: var(--business); }
+        .upcoming-meeting.personal { border-left-color: var(--personal); }
+        .upcoming-meeting .meeting-date {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .upcoming-meeting .meeting-info { flex: 1; }
+        .upcoming-meeting .meeting-title { font-weight: 600; font-size: 0.9rem; }
+        .upcoming-meeting .meeting-time { font-size: 0.8rem; color: var(--accent); }
+        .upcoming-meeting .days-away {
+            background: var(--accent);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .upcoming-meeting .days-away.today { background: var(--trishul-gold); }
+        .upcoming-meeting .days-away.tomorrow { background: var(--fire-orange); color: #fff; }
+        
+        /* ===== ADD BUTTON ===== */
+        .add-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border: none;
+            color: #000;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+            z-index: 100;
+            animation: floatBtn 3s ease-in-out infinite;
+        }
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .add-btn:hover { transform: scale(1.1); }
+        
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 2px solid var(--accent);
+        }
+        .modal-box h2 {
+            margin-bottom: 18px;
+            text-align: center;
+            color: var(--accent);
+            font-family: 'Cinzel', serif;
+        }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-secondary); }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid var(--bg-card);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .form-row { display: flex; gap: 10px; }
+        .form-row .form-group { flex: 1; }
+        .modal-btns { display: flex; gap: 10px; margin-top: 18px; }
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .modal-btn.cancel { background: var(--bg-card); color: var(--text-secondary); }
+        .modal-btn.save { background: var(--accent); color: #000; }
+        
+        /* ===== SYNC BUTTON ===== */
+        .sync-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border: none;
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            margin-left: 10px;
+            box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+            transition: all 0.3s;
+        }
+        .sync-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,212,255,0.5); }
+        .sync-btn.synced { background: linear-gradient(135deg, #00c896, #00e5a0); }
+        .sync-status { font-size: 0.75rem; color: var(--text-secondary); margin-top: 8px; text-align: center; }
+        
+        .reset-btn {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .reset-btn:hover { color: var(--accent); border-color: var(--accent); }
+        
+        /* ===== EMPTY STATE ===== */
+        .empty { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+        .empty span { font-size: 3rem; display: block; margin-bottom: 12px; }
+        
+        /* ===== DIVIDER ===== */
+        .divider { text-align: center; margin: 18px 0; opacity: 0.5; }
+        
+        /* ===== OM SYMBOL ===== */
+        .om-symbol {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 40px;
+            opacity: 0.2;
+            animation: omPulse 4s ease-in-out infinite;
+            z-index: 50;
+        }
+        @keyframes omPulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.1); }
+        }
+        
+        @media (max-width: 400px) {
+            .shiva-section { height: 280px; }
+            .shiva-img { width: 150px; height: 185px; }
+            .trishul { font-size: 140px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔇</button>
+    <audio id="audio" loop preload="metadata">
+        <source src="shiva-music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="om-symbol">🕉️</div>
+
+    <!-- Kailasa Background -->
+    <div class="kailasa-bg">
+        <div class="stars" id="stars"></div>
+        <div class="moon"></div>
+        <div class="mountains">
+            <div class="mountain mountain-1"></div>
+            <div class="mountain mountain-2"></div>
+            <div class="mountain mountain-kailasa">
+                <div class="snow-cap"></div>
+            </div>
+            <div class="mountain mountain-4"></div>
+            <div class="mountain mountain-5"></div>
+        </div>
+    </div>
+
+    <!-- Shiva Section -->
+    <div class="shiva-section">
+        <div class="trishul">🔱</div>
+        <div class="third-eye-glow"></div>
+        <img class="shiva-img" src="shiva.jpg" alt="Lord Shiva" onerror="this.src='https://i.imgur.com/placeholder.jpg'">
+        <div class="shiva-text">॥ ॐ नमः शिवाय ॥</div>
+        <div class="damru">🪘</div>
+        <div class="snake">🐍</div>
+    </div>
+
+    <!-- Main Tabs -->
+    <div class="main-tabs">
+        <button class="main-tab active" id="tabPlanner" onclick="showTab('planner')">📋 Daily Planner</button>
+        <button class="main-tab" id="tabCalendar" onclick="showTab('calendar')">📅 Calendar</button>
+    </div>
+
+    <!-- PLANNER TAB -->
+    <div class="tab-content active" id="plannerContent">
+        <div class="quote-box">
+            <button class="quote-refresh" onclick="newQuote()">🔄</button>
+            <div class="quote-text" id="quoteText"></div>
+            <div class="quote-src" id="quoteSrc"></div>
+        </div>
+        
+        <div class="content">
+            <div class="day-selector" id="daySelector"></div>
+            
+            <div class="progress-box">
+                <div class="progress-header">
+                    <span>🔱 Today's Progress</span>
+                    <span class="progress-val" id="progressVal">0/0</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+                </div>
+            </div>
+            
+            <div class="task-list" id="taskList"></div>
+            
+            <div class="divider">🕉️ ⟡ 🔱 ⟡ 🕉️</div>
+            
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <button class="reset-btn" onclick="resetProgress()">↺ Reset Progress</button>
+                <button class="sync-btn" id="syncBtn" onclick="syncWithAgni()">🔥 Sync with Agni</button>
+            </div>
+            <div class="sync-status" id="syncStatus"></div>
+        </div>
+    </div>
+
+    <!-- CALENDAR TAB -->
+    <div class="tab-content" id="calendarContent">
+        <div class="content" style="padding-top:12px">
+            <div class="cal-header">
+                <div class="cal-nav">
+                    <button onclick="prevMonth()">‹</button>
+                    <span class="cal-month" id="calMonth"></span>
+                    <button onclick="nextMonth()">›</button>
+                </div>
+                <button class="cal-today-btn" onclick="goToday()">Today</button>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+            <div class="meeting-legend">
+                <div class="legend-item"><div class="legend-dot professional"></div> Professional</div>
+                <div class="legend-item"><div class="legend-dot business"></div> Business</div>
+                <div class="legend-item"><div class="legend-dot personal"></div> Personal</div>
+            </div>
+            <div class="upcoming-section">
+                <h3 style="margin-bottom:12px; color:var(--accent);">📅 Upcoming Meetings</h3>
+                <div id="upcomingMeetings"></div>
+            </div>
+        </div>
+    </div>
+
+    <button class="add-btn" onclick="openAddModal()">+</button>
+
+    <!-- TASK MODAL -->
+    <div class="modal" id="taskModal">
+        <div class="modal-box">
+            <h2 id="taskModalTitle">🔱 Add Task</h2>
+            <div class="form-group">
+                <label>📅 Day</label>
+                <select id="taskDay">
+                    <option value="mon">Monday</option>
+                    <option value="tue">Tuesday</option>
+                    <option value="wed">Wednesday</option>
+                    <option value="thu">Thursday</option>
+                    <option value="fri">Friday</option>
+                    <option value="sat">Saturday</option>
+                    <option value="sun">Sunday</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>🕐 Start</label>
+                    <input type="time" id="taskStart" value="09:00">
+                </div>
+                <div class="form-group">
+                    <label>🕐 End</label>
+                    <input type="time" id="taskEnd" value="10:00">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>📝 Task</label>
+                <input type="text" id="taskTitle" placeholder="What needs to be done?">
+            </div>
+            <div class="modal-btns">
+                <button class="modal-btn cancel" onclick="closeTaskModal()">Cancel</button>
+                <button class="modal-btn save" onclick="saveTask()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MEETING MODAL -->
+    <div class="modal" id="meetingModal">
+        <div class="modal-box">
+            <h2 id="meetingModalTitle">📅 Add Meeting</h2>
+            <div class="form-group">
+                <label>📌 Title</label>
+                <input type="text" id="meetingTitle" placeholder="Meeting title">
+            </div>
+            <div class="form-group">
+                <label>📂 Category</label>
+                <select id="meetingCat">
+                    <option value="professional">💼 Professional</option>
+                    <option value="business">📈 Business</option>
+                    <option value="personal">🏠 Personal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>📅 Date</label>
+                <input type="date" id="meetingDate">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>🕐 Start</label>
+                    <input type="time" id="meetingStart" value="10:00">
+                </div>
+                <div class="form-group">
+                    <label>🕐 End</label>
+                    <input type="time" id="meetingEnd" value="11:00">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>📝 Notes</label>
+                <textarea id="meetingNotes" placeholder="Notes, agenda, link..."></textarea>
+            </div>
+            <div class="modal-btns">
+                <button class="modal-btn cancel" onclick="closeMeetingModal()">Cancel</button>
+                <button class="modal-btn save" onclick="saveMeeting()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== STATE =====
+        let currentTab = 'planner';
+        let currentDay = ['sun','mon','tue','wed','thu','fri','sat'][new Date().getDay()];
+        let calDate = new Date();
+        let selDate = new Date();
+        let editTaskId = null;
+        let editMeetingId = null;
+
+        const DAYS = ['sun','mon','tue','wed','thu','fri','sat'];
+        const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        const DAY_EMOJIS = ['🕉️','🔱','🔱','🕉️','🔱','🔱','🪘'];
+
+        // ===== MUSIC =====
+        const audio = document.getElementById('audio');
+        audio.volume = 0.5;
+
+        function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.textContent = '🎵';
+                    btn.classList.add('playing');
+                }).catch(() => alert('Click anywhere first, then try again'));
+            } else {
+                audio.pause();
+                btn.textContent = '🔇';
+                btn.classList.remove('playing');
+            }
+        }
+
+        // ===== QUOTES =====
+        const quotes = [
+            { t: "The one who sees inaction in action, and action in inaction, is wise among humans.", s: "— Lord Shiva" },
+            { t: "When you are in deep meditation, you are free from all identities.", s: "— Shiva Sutras" },
+            { t: "Destruction is not the opposite of creation, it is the culmination of creation.", s: "— Shiva Philosophy" },
+            { t: "The mind is everything. What you think, you become.", s: "— Shiva Wisdom" },
+            { t: "In the dance of existence, I am both the dancer and the dance.", s: "— Nataraja" },
+            { t: "Stillness is the greatest revelation.", s: "— Adiyogi" },
+            { t: "Om Namah Shivaya - I bow to the inner self.", s: "— Mantra" },
+        ];
+        
+        function showQuote() {
+            const q = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quoteText').textContent = `"${q.t}"`;
+            document.getElementById('quoteSrc').textContent = q.s;
+        }
+        function newQuote() { showQuote(); }
+
+        // ===== CREATE STARS =====
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 50 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // ===== CREATE PARTICLES =====
+        function createParticles() {
+            const bg = document.querySelector('.kailasa-bg');
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 8 + 's';
+                p.style.background = ['#fff', '#00d4ff', '#7b68ee', '#d4af37'][Math.floor(Math.random() * 4)];
+                p.style.opacity = 0.3 + Math.random() * 0.4;
+                bg.appendChild(p);
+            }
+        }
+
+        // ===== SCHEDULE DATA =====
+        const defaultSchedule = {
+            mon: [
+                { start: "05:30", end: "06:00", title: "Wake up & Meditation 🧘" },
+                { start: "06:00", end: "06:30", title: "Pray & Breakfast 🙏" },
+                { start: "07:20", end: "08:00", title: "Commute 🚗" },
+                { start: "08:00", end: "17:00", title: "Work 💻" },
+                { start: "17:00", end: "18:30", title: "Return Home 🏠" },
+                { start: "18:30", end: "19:30", title: "Dinner 🍽️" },
+                { start: "19:45", end: "22:00", title: "Personal Projects 💼" },
+                { start: "22:30", end: "23:00", title: "Sleep 😴" }
+            ],
+            tue: [
+                { start: "05:30", end: "06:00", title: "Wake up & Meditation 🧘" },
+                { start: "06:00", end: "06:30", title: "Pray & Breakfast 🙏" },
+                { start: "07:20", end: "08:00", title: "Commute 🚗" },
+                { start: "08:00", end: "17:00", title: "Work 💻" },
+                { start: "18:45", end: "20:00", title: "Training 🥊" },
+                { start: "20:30", end: "21:00", title: "Dinner 🍽️" },
+                { start: "22:30", end: "23:00", title: "Sleep 😴" }
+            ],
+            wed: [
+                { start: "05:30", end: "06:00", title: "Wake up & Meditation 🧘" },
+                { start: "06:00", end: "06:30", title: "Pray & Breakfast 🙏" },
+                { start: "07:20", end: "08:00", title: "Commute 🚗" },
+                { start: "08:00", end: "17:00", title: "Work 💻" },
+                { start: "17:30", end: "20:30", title: "Temple 🙏🕉️" },
+                { start: "21:00", end: "22:00", title: "Reading 📚" },
+                { start: "22:30", end: "23:00", title: "Sleep 😴" }
+            ],
+            thu: [
+                { start: "05:30", end: "06:00", title: "Wake up & Meditation 🧘" },
+                { start: "06:00", end: "06:30", title: "Pray & Breakfast 🙏" },
+                { start: "07:20", end: "08:00", title: "Commute 🚗" },
+                { start: "08:00", end: "17:00", title: "Work 💻" },
+                { start: "18:45", end: "20:00", title: "Training 🥊" },
+                { start: "20:30", end: "21:00", title: "Dinner 🍽️" },
+                { start: "22:30", end: "23:00", title: "Sleep 😴" }
+            ],
+            fri: [
+                { start: "05:30", end: "06:00", title: "Wake up & Meditation 🧘" },
+                { start: "06:00", end: "06:30", title: "Pray & Breakfast 🙏" },
+                { start: "07:20", end: "08:00", title: "Commute 🚗" },
+                { start: "08:00", end: "15:30", title: "Work 💻" },
+                { start: "19:30", end: "21:30", title: "Swimming 🏊" },
+                { start: "22:00", end: "23:00", title: "Relax 🎮" },
+                { start: "23:30", end: "00:00", title: "Sleep 😴" }
+            ],
+            sat: [
+                { start: "08:00", end: "09:00", title: "Wake up 🌅" },
+                { start: "09:00", end: "10:00", title: "Breakfast 🍳" },
+                { start: "10:00", end: "13:00", title: "Personal Projects 🎯" },
+                { start: "14:00", end: "18:00", title: "Weekend Activities 🌟" },
+                { start: "20:00", end: "21:00", title: "Dinner 🍽️" },
+                { start: "23:30", end: "00:00", title: "Sleep 😴" }
+            ],
+            sun: [
+                { start: "08:00", end: "09:00", title: "Wake up 🌅" },
+                { start: "10:00", end: "12:00", title: "Temple 🙏🕉️" },
+                { start: "12:00", end: "13:00", title: "Lunch 🍽️" },
+                { start: "13:00", end: "16:00", title: "Rest & Meditation 🧘" },
+                { start: "16:00", end: "18:00", title: "Week Planning 📋" },
+                { start: "20:00", end: "22:00", title: "Reading 📚" },
+                { start: "22:30", end: "23:00", title: "Sleep 😴" }
+            ]
+        };
+
+        // ===== STORAGE =====
+        function getSchedule() {
+            const d = localStorage.getItem('shiva_schedule');
+            return d ? JSON.parse(d) : defaultSchedule;
+        }
+        function saveSchedule(s) { localStorage.setItem('shiva_schedule', JSON.stringify(s)); }
+        function getMeetings() {
+            const d = localStorage.getItem('shiva_meetings');
+            return d ? JSON.parse(d) : [];
+        }
+        function saveMeetingsData(m) { localStorage.setItem('shiva_meetings', JSON.stringify(m)); }
+        function getCompleted() {
+            const today = new Date().toDateString();
+            const d = localStorage.getItem('shiva_completed');
+            const c = d ? JSON.parse(d) : { date: today, tasks: {} };
+            return c.date === today ? c : { date: today, tasks: {} };
+        }
+        function saveCompleted(c) { localStorage.setItem('shiva_completed', JSON.stringify(c)); }
+
+        // ===== TAB SWITCHING =====
+        function showTab(tab) {
+            currentTab = tab;
+            document.getElementById('tabPlanner').classList.toggle('active', tab === 'planner');
+            document.getElementById('tabCalendar').classList.toggle('active', tab === 'calendar');
+            document.getElementById('plannerContent').classList.toggle('active', tab === 'planner');
+            document.getElementById('calendarContent').classList.toggle('active', tab === 'calendar');
+            if (tab === 'calendar') renderCalendar();
+        }
+
+        // ===== DAY SELECTOR =====
+        function renderDaySelector() {
+            const todayIdx = new Date().getDay();
+            const todayName = DAYS[todayIdx];
+            let html = '';
+            for (let i = 0; i < 7; i++) {
+                const d = DAYS[i];
+                const isActive = d === currentDay;
+                const isToday = d === todayName;
+                html += `<button class="day-btn ${isActive?'active':''} ${isToday?'today':''}" onclick="selectDay('${d}')">${DAY_EMOJIS[i]} ${DAY_NAMES[i]}</button>`;
+            }
+            document.getElementById('daySelector').innerHTML = html;
+        }
+
+        function selectDay(d) {
+            currentDay = d;
+            renderDaySelector();
+            renderTasks();
+        }
+
+        // ===== TASKS =====
+        function renderTasks() {
+            const schedule = getSchedule();
+            const tasks = schedule[currentDay] || [];
+            const completed = getCompleted();
+            const todayName = DAYS[new Date().getDay()];
+            const container = document.getElementById('taskList');
+
+            if (!tasks.length) {
+                container.innerHTML = '<div class="empty"><span>🕉️</span><p>No tasks for this day</p></div>';
+                updateProgress(0, 0);
+                return;
+            }
+
+            let html = '';
+            tasks.forEach((t, i) => {
+                const id = `${currentDay}-${i}`;
+                const done = completed.tasks[id];
+                html += `
+                    <div class="task-item ${done?'completed':''}">
+                        <div class="task-check ${done?'done':''}" onclick="toggleTask('${id}')"></div>
+                        <div class="task-body">
+                            <div class="task-time">⏰ ${fmtTime(t.start)} - ${fmtTime(t.end)}</div>
+                            <div class="task-title">${t.title}</div>
+                        </div>
+                        <div class="task-btns">
+                            <button class="task-btn" onclick="editTask(${i})">✎</button>
+                            <button class="task-btn del" onclick="deleteTask(${i})">×</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+
+            if (currentDay === todayName) {
+                const doneCount = Object.keys(completed.tasks).filter(k => k.startsWith(currentDay) && completed.tasks[k]).length;
+                updateProgress(doneCount, tasks.length);
+            } else {
+                updateProgress(0, tasks.length);
+            }
+        }
+
+        function fmtTime(t) {
+            const [h, m] = t.split(':');
+            const hr = parseInt(h);
+            return `${hr % 12 || 12}:${m} ${hr >= 12 ? 'PM' : 'AM'}`;
+        }
+
+        function toggleTask(id) {
+            const c = getCompleted();
+            c.tasks[id] = !c.tasks[id];
+            saveCompleted(c);
+            renderTasks();
+        }
+
+        function updateProgress(done, total) {
+            const pct = total ? Math.round(done / total * 100) : 0;
+            document.getElementById('progressVal').textContent = `${done}/${total} (${pct}%)`;
+            document.getElementById('progressFill').style.width = pct + '%';
+        }
+
+        function resetProgress() {
+            if (currentDay !== DAYS[new Date().getDay()]) return alert('Can only reset today');
+            const c = getCompleted();
+            Object.keys(c.tasks).forEach(k => { if (k.startsWith(currentDay)) delete c.tasks[k]; });
+            saveCompleted(c);
+            renderTasks();
+        }
+
+        // ===== CALENDAR =====
+        function renderCalendar() {
+            const year = calDate.getFullYear();
+            const month = calDate.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            const meetings = getMeetings();
+
+            document.getElementById('calMonth').textContent = calDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+            let html = DAY_NAMES.map(d => `<div class="cal-weekday">${d}</div>`).join('');
+
+            const prevDays = new Date(year, month, 0).getDate();
+            for (let i = firstDay - 1; i >= 0; i--) {
+                html += `<div class="cal-day other">${prevDays - i}</div>`;
+            }
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const date = new Date(year, month, d);
+                const dateStr = date.toISOString().split('T')[0];
+                const isToday = date.toDateString() === today.toDateString();
+                const isSel = date.toDateString() === selDate.toDateString();
+                const hasMeeting = meetings.some(m => m.date === dateStr);
+                html += `<div class="cal-day ${isToday ? 'today' : ''} ${isSel ? 'selected' : ''} ${hasMeeting ? 'has-meeting' : ''}" onclick="selectDate(${year},${month},${d})">${d}</div>`;
+            }
+
+            const remaining = 42 - (firstDay + daysInMonth);
+            for (let i = 1; i <= remaining; i++) {
+                html += `<div class="cal-day other">${i}</div>`;
+            }
+
+            document.getElementById('calGrid').innerHTML = html;
+            renderUpcomingMeetings();
+        }
+
+        function selectDate(y, m, d) {
+            selDate = new Date(y, m, d);
+            renderCalendar();
+        }
+
+        function prevMonth() { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); }
+        function nextMonth() { calDate.setMonth(calDate.getMonth() + 1); renderCalendar(); }
+        function goToday() { calDate = new Date(); selDate = new Date(); renderCalendar(); }
+
+        function renderUpcomingMeetings() {
+            const meetings = getMeetings();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const upcoming = meetings
+                .filter(m => new Date(m.date + 'T00:00:00') >= today)
+                .sort((a, b) => a.date === b.date ? a.startTime.localeCompare(b.startTime) : a.date.localeCompare(b.date))
+                .slice(0, 10);
+            
+            const container = document.getElementById('upcomingMeetings');
+            
+            if (!upcoming.length) {
+                container.innerHTML = '<div class="empty" style="padding:20px"><span>🔱</span><p>No upcoming meetings</p></div>';
+                return;
+            }
+            
+            let html = '';
+            upcoming.forEach(m => {
+                const mDate = new Date(m.date + 'T00:00:00');
+                const diffDays = Math.floor((mDate - today) / (1000 * 60 * 60 * 24));
+                
+                let daysLabel = diffDays === 0 ? 'Today' : diffDays === 1 ? 'Tomorrow' : `In ${diffDays} days`;
+                let daysClass = diffDays === 0 ? 'today' : diffDays === 1 ? 'tomorrow' : '';
+                const dateDisplay = mDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                
+                html += `
+                    <div class="upcoming-meeting ${m.category}">
+                        <div class="meeting-info">
+                            <div class="meeting-date">${dateDisplay}</div>
+                            <div class="meeting-title">${m.title}</div>
+                            <div class="meeting-time">⏰ ${fmtTime(m.startTime)} - ${fmtTime(m.endTime)}</div>
+                        </div>
+                        <div class="days-away ${daysClass}">${daysLabel}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // ===== MODALS =====
+        function openAddModal() {
+            if (currentTab === 'planner') openTaskModal();
+            else openMeetingModal();
+        }
+
+        function openTaskModal() {
+            editTaskId = null;
+            document.getElementById('taskModalTitle').textContent = '🔱 Add Task';
+            document.getElementById('taskDay').value = currentDay;
+            document.getElementById('taskStart').value = '09:00';
+            document.getElementById('taskEnd').value = '10:00';
+            document.getElementById('taskTitle').value = '';
+            document.getElementById('taskModal').classList.add('active');
+        }
+
+        function closeTaskModal() { document.getElementById('taskModal').classList.remove('active'); }
+
+        function editTask(i) {
+            const task = getSchedule()[currentDay][i];
+            editTaskId = i;
+            document.getElementById('taskModalTitle').textContent = '✏️ Edit Task';
+            document.getElementById('taskDay').value = currentDay;
+            document.getElementById('taskStart').value = task.start;
+            document.getElementById('taskEnd').value = task.end;
+            document.getElementById('taskTitle').value = task.title;
+            document.getElementById('taskModal').classList.add('active');
+        }
+
+        function saveTask() {
+            const day = document.getElementById('taskDay').value;
+            const task = {
+                start: document.getElementById('taskStart').value,
+                end: document.getElementById('taskEnd').value,
+                title: document.getElementById('taskTitle').value.trim()
+            };
+            if (!task.title) return alert('Enter task title');
+
+            const schedule = getSchedule();
+            if (!schedule[day]) schedule[day] = [];
+            if (editTaskId !== null) schedule[day][editTaskId] = task;
+            else schedule[day].push(task);
+            schedule[day].sort((a, b) => a.start.localeCompare(b.start));
+            saveSchedule(schedule);
+            closeTaskModal();
+            currentDay = day;
+            renderDaySelector();
+            renderTasks();
+        }
+
+        function deleteTask(i) {
+            if (!confirm('Delete task?')) return;
+            const schedule = getSchedule();
+            schedule[currentDay].splice(i, 1);
+            saveSchedule(schedule);
+            renderTasks();
+        }
+
+        function openMeetingModal() {
+            editMeetingId = null;
+            document.getElementById('meetingModalTitle').textContent = '📅 Add Meeting';
+            document.getElementById('meetingTitle').value = '';
+            document.getElementById('meetingCat').value = 'professional';
+            document.getElementById('meetingDate').value = selDate.toISOString().split('T')[0];
+            document.getElementById('meetingStart').value = '10:00';
+            document.getElementById('meetingEnd').value = '11:00';
+            document.getElementById('meetingNotes').value = '';
+            document.getElementById('meetingModal').classList.add('active');
+        }
+
+        function closeMeetingModal() { document.getElementById('meetingModal').classList.remove('active'); }
+
+        function saveMeeting() {
+            const meeting = {
+                title: document.getElementById('meetingTitle').value.trim(),
+                category: document.getElementById('meetingCat').value,
+                date: document.getElementById('meetingDate').value,
+                startTime: document.getElementById('meetingStart').value,
+                endTime: document.getElementById('meetingEnd').value,
+                notes: document.getElementById('meetingNotes').value.trim()
+            };
+            if (!meeting.title || !meeting.date) return alert('Enter title and date');
+
+            let meetings = getMeetings();
+            meetings.push(meeting);
+            meetings.sort((a, b) => a.date === b.date ? a.startTime.localeCompare(b.startTime) : a.date.localeCompare(b.date));
+            saveMeetingsData(meetings);
+            closeMeetingModal();
+            selDate = new Date(meeting.date + 'T00:00:00');
+            calDate = new Date(meeting.date + 'T00:00:00');
+            showTab('calendar');
+            renderCalendar();
+        }
+
+        // ===== AGNI SYNC =====
+        async function syncWithAgni() {
+            const btn = document.getElementById('syncBtn');
+            const status = document.getElementById('syncStatus');
+            const meetings = getMeetings();
+            
+            const now = new Date();
+            const today = now.toISOString().split('T')[0];
+            const futureMeetings = meetings.filter(m => m.date >= today);
+            
+            const syncData = {
+                lastSync: new Date().toISOString(),
+                userId: '5265730983',
+                planner: 'shiva',
+                meetings: futureMeetings.map(m => ({
+                    title: m.title,
+                    date: m.date,
+                    startTime: m.startTime,
+                    endTime: m.endTime,
+                    category: m.category,
+                    notes: m.notes || '',
+                    reminders: { thirtyMin: false, fiveMin: false }
+                }))
+            };
+            
+            btn.textContent = '📋 Copying...';
+            
+            try {
+                await navigator.clipboard.writeText('sync meetings\n' + JSON.stringify(syncData));
+                btn.textContent = '✅ Copied!';
+                btn.classList.add('synced');
+                status.innerHTML = '📋 <b>Copied!</b> Now paste to Agni in chat (Ctrl+V)';
+            } catch (e) {
+                const ta = document.createElement('textarea');
+                ta.value = 'sync meetings\n' + JSON.stringify(syncData);
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                btn.textContent = '✅ Copied!';
+                status.innerHTML = '📋 <b>Copied!</b> Now paste to Agni in chat';
+            }
+            
+            setTimeout(() => {
+                btn.textContent = '🔥 Sync with Agni';
+                btn.classList.remove('synced');
+            }, 5000);
+        }
+
+        // ===== INIT =====
+        function init() {
+            createStars();
+            createParticles();
+            showQuote();
+            renderDaySelector();
+            renderTasks();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
